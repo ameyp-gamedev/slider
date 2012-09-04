@@ -10,7 +10,6 @@ var Block = function(spec, params) {
 		       });
 
     var activate = function() {
-	console.log(params.name + " is active.");
     };
 
     var deactivate = function() {
