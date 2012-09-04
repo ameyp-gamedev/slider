@@ -164,7 +164,7 @@ var startGame = function () {
     }];
 
     // loadSprites();
-    createLevel(gs, levelData);
+    LevelManager.createLevel(gs, levelData);
 };
 
 var loadSprites = function() {

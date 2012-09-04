@@ -1,6 +1,6 @@
-var Block = function(params) {
-    var pos = [2 * params.offset * params.pos[0] + params.offset,
-	       2 * params.offset * params.pos[1] + params.offset];
+var Block = function(spec, params) {
+    var pos = [2 * spec.offset * params.pos[0] + spec.offset,
+	       2 * spec.offset * params.pos[1] + spec.offset];
     var targets = params.targets;
 
     var p = new Sprite(params.sprite.anchor,
@@ -8,9 +8,14 @@ var Block = function(params) {
 		       function() {
 			   p.action(params.sprite.default);
 		       });
-    var active = false;
 
-    var get_name = function() {
+    var activate = function() {
+    };
+
+    var deactivate = function() {
+    };
+
+    var getName = function() {
 	return params.name;
     };
 
@@ -19,7 +24,12 @@ var Block = function(params) {
 	return [aabb[0], aabb[1], aabb[0] + aabb[2], aabb[1] + aabb[3]];
     };
 
+    var getPosIndex = function() {
+	return params.pos;
+    };
+
     var pointerMove = function() {
+	spec.setActiveBlock(params.pos);
     };
 
     var pointerDown = function() {
@@ -33,13 +43,19 @@ var Block = function(params) {
     };
 
     return {
-	get_name: get_name,
+	// entity related
+	getName: getName,
+	getPosIndex: getPosIndex,
 	draw: draw,
 
 	// mouse related
 	pointerBox: pointerBox,
 	pointerMove: pointerMove,
 	pointerDown: pointerDown,
-	pointerUp: pointerUp
+	pointerUp: pointerUp,
+
+	// helpers
+	activate: activate,
+	deactivate: deactivate
     };
 };
