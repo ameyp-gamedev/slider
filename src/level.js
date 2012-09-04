@@ -81,7 +81,7 @@ var LevelManager = function() {
 	getBlockOrder();
     };
 
-    var createLevel = function(gs, blocks) {
+    var createLevel = function(gs, blocks, order) {
 	var i, index;
 	var block;
 	var data = {
@@ -90,16 +90,36 @@ var LevelManager = function() {
 	    clickedOnBlock: clickedOnBlock
 	};
 
-	for ( i = 0; i < blocks.length; i += 1 ) {
-	    index = parseInt(blocks[i].name.split("block")[1]);
-	    blocks[i].pos = [(index % 4),Math.floor(index / 4)];
-	    // console.log("Position for " + blocks[i].name + " with index " + index + " is " + blocks[i].pos);
+	// check length of order array
+	if ( order.length < 16 ) {
+	    alert("You need to specify the order for all 16 blocks");
+	    return;
+	}
 
-	    block = Block( data, blocks[i] );
+	// detect duplicates
+	var sortedArray = order.slice();
+	sortedArray.sort(function( a, b ) {
+	    return parseInt(a) > parseInt(b);
+	});
+	for ( i = 0; i < sortedArray.length - 1; i += 1 ) {
+	    if ( sortedArray[i + 1] == sortedArray[i]) {
+		alert( sortedArray[i] + " appears twice in the list." );
+		return;
+	    }
+	}
+
+	for ( i = 0; i < order.length; i += 1 ) {
+	    //index = parseInt( blocks[order[i]].name.split( "block" )[1] );
+	    index = order[i];
+	    blocks[index].pos = [(i % 4), Math.floor( i / 4 )];
+	    // console.log("Position for " + blocks[index].name + " with index " + index + " in order " + i + " is " + blocks[index].pos);
+
+	    block = Block( data, blocks[index] );
 	    _blocks.push( block );
 
 	    gs.addEntity( block );
 	}
+
 	gs.launch();
 
 	var update = function() {
