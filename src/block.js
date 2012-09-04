@@ -20,15 +20,12 @@ var Block = function(params) {
     };
 
     var pointerMove = function() {
-	console.log("pointerMove: " + get_name());
     };
 
     var pointerDown = function() {
-	console.log("pointerDown: " + get_name());
     };
 
     var pointerUp = function() {
-	console.log("pointerUp: " + get_name());
     };
 
     var draw = function(c) {
