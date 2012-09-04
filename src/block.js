@@ -10,13 +10,28 @@ var Block = function(spec, params) {
 		       });
 
     var activate = function() {
+	console.log(params.name + " is active.");
     };
 
     var deactivate = function() {
     };
 
+    var isEmpty = function() {
+	return params.empty;
+    };
+
     var getName = function() {
 	return params.name;
+    };
+
+    var getPos = function() {
+	return params.pos;
+    };
+
+    function setPos(newPos) {
+	params.pos = newPos;
+	pos = [2 * spec.offset * params.pos[0] + spec.offset,
+	       2 * spec.offset * params.pos[1] + spec.offset];
     };
 
     var pointerBox = function() {
@@ -24,18 +39,15 @@ var Block = function(spec, params) {
 	return [aabb[0], aabb[1], aabb[0] + aabb[2], aabb[1] + aabb[3]];
     };
 
-    var getPosIndex = function() {
-	return params.pos;
-    };
-
     var pointerMove = function() {
-	spec.setActiveBlock(params.pos);
+	spec.setActiveBlock( getPos() );
     };
 
     var pointerDown = function() {
     };
 
     var pointerUp = function() {
+	spec.clickedOnBlock( getPos() );
     };
 
     var draw = function(c) {
@@ -45,7 +57,8 @@ var Block = function(spec, params) {
     return {
 	// entity related
 	getName: getName,
-	getPosIndex: getPosIndex,
+	getPos: getPos,
+	setPos: setPos,
 	draw: draw,
 
 	// mouse related
@@ -56,6 +69,7 @@ var Block = function(spec, params) {
 
 	// helpers
 	activate: activate,
-	deactivate: deactivate
+	deactivate: deactivate,
+	isEmpty: isEmpty
     };
 };
