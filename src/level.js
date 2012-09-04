@@ -8,9 +8,8 @@ var createLevel = function(gs, blocks) {
 
     for ( i = 0; i < blocks.length; i += 1 ) {
 	index = parseInt(blocks[i].name.split("block")[1]);
-	// blocks[i].pos = [(index % 4),Math.floor(index / 4)];
-	blocks[i].pos = [2 * offset * (index % 4) + offset,
-			 2 * offset * Math.floor(index / 4) + offset];
+	blocks[i].pos = [(index % 4),Math.floor(index / 4)];
+	blocks[i].offset = gs.width / 8;
 	// console.log("Position for " + blocks[i].name + " with index " + index + " is " + blocks[i].pos);
 
 	block = Block( blocks[i] );

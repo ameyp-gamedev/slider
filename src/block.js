@@ -1,5 +1,6 @@
 var Block = function(params) {
-    var pos = params.pos;
+    var pos = [2 * params.offset * params.pos[0] + params.offset,
+	       2 * params.offset * params.pos[1] + params.offset];
     var targets = params.targets;
 
     var p = new Sprite(params.sprite.anchor,
@@ -15,10 +16,7 @@ var Block = function(params) {
 
     var pointerBox = function() {
 	var aabb = p.aabb(pos);
-	// console.log("AABB for " + params.name + " is " + aabb);
-	var pb = [aabb[0], aabb[1], aabb[0] + aabb[2], aabb[1] + aabb[3]];
-	// console.log("PB for " + params.name + " is " + pb);
-	return pb;
+	return [aabb[0], aabb[1], aabb[0] + aabb[2], aabb[1] + aabb[3]];
     };
 
     var pointerMove = function() {
