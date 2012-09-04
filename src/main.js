@@ -186,6 +186,7 @@ var startGame = function () {
 
 var loadSprites = function() {
     Sprite.preload([
+	"img/block0.png",
 	"img/block1.png",
 	"img/block2.png",
 	"img/block3.png",
@@ -199,8 +200,6 @@ var loadSprites = function() {
 	"img/block11.png",
 	"img/block12.png",
 	"img/block13.png",
-	"img/block14.png",
-	"img/block15.png",
-	"img/block16.png"
+	"img/block14.png"
     ]);
 };
