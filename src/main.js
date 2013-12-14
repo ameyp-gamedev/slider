@@ -179,7 +179,7 @@ var startGame = function () {
 	empty: true
     }];
 
-    // loadSprites();
+    loadSprites();
     var order = [13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 0, 14];
     LevelManager.createLevel(gs, levelData, order);
 };
